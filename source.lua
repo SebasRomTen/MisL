@@ -4,7 +4,7 @@
 This project is entirely made by SebasRomTen
 If u give me credit i will be really thankful with u.
 3/4/23
-MisL was made
+Was made on
 
 
 ]]--
@@ -35,7 +35,7 @@ end
 
 misc.Loops.HB = function(f)
 	coroutine.wrap(function()
-		RunService.Stepped:Connect(f)
+		RunService.Heartbeat:Connect(f)
 	end)()
 end
 
