@@ -1,16 +1,12 @@
 --[[
-
-
 This project is entirely made by SebasRomTen
 If u give me credit i will be really thankful with u.
 3/4/23
 Was made on
 3/4/23
 Added Tweens, Http, Tables and string concat function
-
 TODO:
 Nothing RN
-
 ]]--
 
 --//Framework
@@ -119,14 +115,20 @@ end
 
 misc.Chars.new = function(props)
 	local HumDesc = Instance.new("HumanoidDescription")
-	
+
 	local function applyprops(t, obj)
-		for i, v in next, t do
-			obj[i] = v
+		if t then
+			for i, v in next, t do
+				obj[i] = v
+			end
 		end
 	end
-	
-	applyprops(props, HumDesc)
+
+	if props then
+		applyprops(props, HumDesc)
+	else
+		applyprops(nil, HumDesc)
+	end
 
 	local char = Players:CreateHumanoidModelFromDescription(HumDesc, "R6")
 	return char
