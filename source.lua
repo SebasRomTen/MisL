@@ -126,9 +126,9 @@ misc.Chars.new = function(props)
 		end
 	end
 	
-	applyprops(HumDesc)
+	applyprops(props, HumDesc)
 
-	local char = game:GetService("Players"):CreateHumanoidModelFromDescription(HumDesc, "R6")
+	local char = Players:CreateHumanoidModelFromDescription(HumDesc, "R6")
 	return char
 end
 
