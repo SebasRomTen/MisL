@@ -32,13 +32,9 @@ misc.Chars = {}
 misc.Obfuscation = {}
 
 misc.Obfuscation.Base64 = nil
+misc.Http.returnData = nil
 
 --//Functions
-
-function tween(object:Instance, waitTime, style, direction, props)
-	local _a = game:GetService("TweenService"):Create(object, TweenInfo.new(waitTime, Enum.EasingStyle[style], Enum.EasingDirection[direction], 0, false), props)
-	return _a
-end
 
 local function returnData(file)
 	local lcode
@@ -59,6 +55,7 @@ end
 --//Lib Coding
 local Base64 = returnData("https://raw.githubusercontent.com/SebasRomTen/Lua-Base64-Encription/main/Base64.lua")
 misc.Obfuscation.Base64 = Base64
+misc.Http.returnData = returnData
 
 misc.Loops.RS = function(f)
 	coroutine.wrap(function()
