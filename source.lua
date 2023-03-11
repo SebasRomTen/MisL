@@ -44,7 +44,6 @@ local function returnData(file)
 		lcode = code
 	end)
 	if s then
-		print("Loaded without errors")
 		return lcode
 	else
 		warn("Failed to load file")
