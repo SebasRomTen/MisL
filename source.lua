@@ -29,15 +29,36 @@ misc.Tweens = {}
 misc.Http = {}
 misc.Tables = {}
 misc.Chars = {}
+misc.Obfuscation = {}
 
---//Built-In Functions
+misc.Obfuscation.Base64 = nil
+
+--//Functions
 
 function tween(object:Instance, waitTime, style, direction, props)
 	local _a = game:GetService("TweenService"):Create(object, TweenInfo.new(waitTime, Enum.EasingStyle[style], Enum.EasingDirection[direction], 0, false), props)
 	return _a
 end
 
+local function returnData(file)
+	local lcode
+	local s, e = pcall(function()
+		local content = HttpService:GetAsync(file)
+		local code = loadstring(content)()
+		lcode = code
+	end)
+	if s then
+		print("Loaded without errors")
+		return lcode
+	else
+		warn("Failed to load file")
+		error(e)
+	end
+end
+
 --//Lib Coding
+local Base64 = returnData("https://raw.githubusercontent.com/SebasRomTen/Lua-Base64-Encription/main/Base64.lua")
+misc.Obfuscation.Base64 = Base64
 
 misc.Loops.RS = function(f)
 	coroutine.wrap(function()
