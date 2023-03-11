@@ -57,33 +57,38 @@ misc.Obfuscation.Base64 = Base64
 misc.Http.returnData = returnData
 
 misc.Loops.RS = function(f)
-	coroutine.wrap(function()
+	local new = coroutine.create(function()
 		if RunService:IsClient() then
 			RunService.RenderStepped:Connect(f)
 		elseif RunService:IsServer() then
 			RunService.Stepped:Connect(f)
 		end
-	end)()
+	end)
+	coroutine.resume(new)
 end
 
 misc.Loops.HB = function(f)
-	coroutine.wrap(function()
+	local new = coroutine.create(function()
 		RunService.Heartbeat:Connect(f)
-	end)()
+	end)
+	coroutine.resume(new)
 end
 
 misc.Loops.SL = function(func)
-	local Bind = Instance.new('BindableEvent')
+	local new = coroutine.create(function()
+		local Bind = Instance.new('BindableEvent')
 
-	for i,v in ipairs({RunService.Heartbeat, RunService.Stepped, RunService.PreRender, RunService.PostSimulation, RunService.PreSimulation}) do
-		v.Connect(v, function()
-			return Bind.Fire(Bind, tick())
-		end)
-	end
+		for i,v in ipairs({RunService.Heartbeat, RunService.Stepped, RunService.PreRender, RunService.PostSimulation, RunService.PreSimulation}) do
+			v.Connect(v, function()
+				return Bind.Fire(Bind, tick())
+			end)
+		end
 
-	local SuperLoop = Bind.Event
+		local SuperLoop = Bind.Event
 
-	SuperLoop:Connect(func)
+		SuperLoop:Connect(func)
+	end)
+	coroutine.resume(new)
 end
 
 misc.String.GetAllCharacters = function(s:string)
