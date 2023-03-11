@@ -55,6 +55,20 @@ misc.Loops.HB = function(f)
 	end)()
 end
 
+misc.Loops.SL = function(func)
+	local Bind = Instance.new('BindableEvent')
+
+	for i,v in ipairs({RunService.Heartbeat, RunService.Stepped, RunService.PreRender, RunService.PostSimulation, RunService.PreSimulation}) do
+		v.Connect(v, function()
+			return Bind.Fire(Bind, tick())
+		end)
+	end
+
+	local SuperLoop = Bind.Event
+
+	SuperLoop:Connect(func)
+end
+
 misc.String.GetAllCharacters = function(s:string)
 	local chars = {}
 	for i = 1, #s do
@@ -127,7 +141,14 @@ misc.Chars.new = function(props)
 	if props then
 		applyprops(props, HumDesc)
 	else
-		applyprops(nil, HumDesc)
+		applyprops({
+			HeadColor = Color3.new(1, 1, 1),
+			TorsoColor = Color3.new(1, 1, 1),
+			RightArmColor = Color3.new(1, 1, 1),
+			LeftArmColor = Color3.new(1, 1, 1),
+			LeftLegColor = Color3.new(1, 1, 1),
+			RightLegColor = Color3.new(1, 1, 1)
+		}, HumDesc)
 	end
 
 	local char = Players:CreateHumanoidModelFromDescription(HumDesc, "R6")
