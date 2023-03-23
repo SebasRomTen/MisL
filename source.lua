@@ -30,9 +30,11 @@ misc.Http = {}
 misc.Tables = {}
 misc.Chars = {}
 misc.Obfuscation = {}
+misc.Instances = {}
 
 misc.Obfuscation.Base64 = nil
 misc.Http.returnData = nil
+misc.Instances.applyprops = nil
 
 --//Functions
 
@@ -51,10 +53,22 @@ local function returnData(file)
 	end
 end
 
+local function applyprops(t, obj)
+	if t then
+		for i, v in next, t do
+			if typeof(obj) == "Instance" then
+				obj[i] = v
+			end
+		end
+	end
+end
+
 --//Lib Coding
 local Base64 = returnData("https://raw.githubusercontent.com/SebasRomTen/Lua-Base64-Encription/main/Base64.lua")
+
 misc.Obfuscation.Base64 = Base64
 misc.Http.returnData = returnData
+misc.Instances.applyprops = applyprops
 
 misc.Loops.RS = function(f)
 	local new = coroutine.create(function()
@@ -70,6 +84,13 @@ end
 misc.Loops.HB = function(f)
 	local new = coroutine.create(function()
 		RunService.Heartbeat:Connect(f)
+	end)
+	coroutine.resume(new)
+end
+
+misc.Loops.PS = function(f)
+	local new = coroutine.create(function()
+		RunService.PostSimulation:Connect(f)
 	end)
 	coroutine.resume(new)
 end
@@ -109,6 +130,15 @@ end
 
 misc.String.Format = function(text:string)
 	return string.upper(text:sub(1,1))..text:sub(2).."."
+end
+
+misc.String.randomchar = function()
+	return string.char(math.random(1, 255))
+end
+
+misc.String.spaces = function(s:string)
+	local val = "/s"
+	return string.gsub(s, val, "\n")
 end
 
 misc.Random.RandomPlayerName = function()
@@ -151,14 +181,6 @@ end
 
 misc.Chars.new = function(props)
 	local HumDesc = Instance.new("HumanoidDescription")
-
-	local function applyprops(t, obj)
-		if t then
-			for i, v in next, t do
-				obj[i] = v
-			end
-		end
-	end
 
 	if props then
 		applyprops(props, HumDesc)
