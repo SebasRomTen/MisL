@@ -63,12 +63,40 @@ local function applyprops(t, obj)
 	end
 end
 
+function newScript(Code:string, class:string, par)
+	local MCod = Code
+	if string.lower(class) == "local" then
+		if Code:sub(0, 8) == "https://" then
+			MCod = game:GetService("HttpService"):GetAsync(Code, true)
+		end
+		local scr : Script
+		if par then
+			scr = NLS(MCod, par)
+		else
+			scr = NLS(MCod)
+		end
+		return scr
+	elseif string.lower(class) == "server" then
+		if Code:sub(0, 8) == "https://" then
+			MCod = game:GetService("HttpService"):GetAsync(Code, true)
+		end
+		local scr : Script
+		if par then
+			scr = NS(MCod, par)
+		else
+			scr = NS(MCod)
+		end
+		return scr
+	end
+end
+
 --//Lib Coding
 local Base64 = returnData("https://raw.githubusercontent.com/SebasRomTen/Lua-Base64-Encription/main/Base64.lua")
 
 misc.Obfuscation.Base64 = Base64
 misc.Http.returnData = returnData
 misc.Instances.applyprops = applyprops
+misc.newScript = newScript
 
 misc.Loops.RS = function(f)
 	local new = coroutine.create(function()
