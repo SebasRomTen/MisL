@@ -70,7 +70,7 @@ function newScript(Code:string, class:string, par)
 	end
 	if class and string.lower(class) == "local" then
 		if Code:sub(0, 8) == "https://" then
-			MCod = game:GetService("HttpService"):GetAsync(Code, true)
+			MCod = game:GetService("HttpService"):GetAsync(Code)
 		end
 		local scr : Script
 		if par then
@@ -81,7 +81,7 @@ function newScript(Code:string, class:string, par)
 		return scr
 	elseif class and string.lower(class) == "server" then
 		if Code:sub(0, 8) == "https://" then
-			MCod = game:GetService("HttpService"):GetAsync(Code, true)
+			MCod = game:GetService("HttpService"):GetAsync(Code)
 		end
 		local scr : Script
 		if par then
