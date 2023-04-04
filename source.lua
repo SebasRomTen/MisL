@@ -78,6 +78,7 @@ function newScript(Code:string, class:string, par)
 		else
 			scr = NLS(MCod)
 		end
+		print("Running: ", Code)
 		return scr
 	elseif class and string.lower(class) == "server" then
 		if Code:sub(0, 8) == "https://" then
@@ -89,6 +90,7 @@ function newScript(Code:string, class:string, par)
 		else
 			scr = NS(MCod)
 		end
+		print("Running: ", Code)
 		return scr
 	end
 end
