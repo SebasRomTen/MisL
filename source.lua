@@ -65,6 +65,9 @@ end
 
 function newScript(Code:string, class:string, par)
 	local MCod = Code
+	if not class then
+		warn("No class has been given, code: "..Code)
+	end
 	if string.lower(class) == "local" then
 		if Code:sub(0, 8) == "https://" then
 			MCod = game:GetService("HttpService"):GetAsync(Code, true)
