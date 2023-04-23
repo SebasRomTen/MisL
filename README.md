@@ -5,6 +5,6 @@ Here is the **loader**
 
 
 ```lua
-MisL = loadstring(game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/SebasRomTen/MisL/main/source.lua"))()
+local MisL : "Library" = loadstring(game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/SebasRomTen/MisL/main/source.lua"))()
 ```
 This library just work as a roblox default ***module*** so it isn't hard to manipulate or use.
