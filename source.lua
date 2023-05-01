@@ -235,4 +235,12 @@ misc.Chars.animate = function(char)
 	animate(char)
 end
 
+misc.Chars.mesh = function(Bodypart : "The body part of the mesh", MeshId : "The mesh id for the character mesh", Texture : "The texture of the character mesh", props : "Optional additional properties")
+	local Mesh = Instance.new("CharacterMesh")
+	Mesh.BodyPart  = nil
+	Mesh.MeshId = nil
+	Mesh.OverlayTextureId = nil
+	return Mesh
+end
+
 return misc
