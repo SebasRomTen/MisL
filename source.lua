@@ -243,4 +243,8 @@ misc.Chars.mesh = function(Bodypart : "The body part of the mesh", MeshId : "The
 	return Mesh
 end
 
+misc.partToRegion3Size = function(part)
+	return part.Position - part.Size/2, part.Position + part.Size/2
+end
+
 return misc
