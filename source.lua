@@ -63,9 +63,38 @@ local function applyprops(t, obj)
 	end
 end
 
-function newScript(Code:string, class:string, par)
+function rich(String : string, sub, color : string)
+	return String:gsub(sub, ("<font color='rgb(%s)'>%s</font>"):format(color, sub), 1)
+end
+
+function number(s, su)
+	return rich(s, su, "255, 198, 0")
+end
+
+function String(s, su)
+	return rich(s, su, "173, 241, 149")
+end
+
+function functionName(s, su)
+	return rich(s, su, "253, 251, 172")
+end
+
+function Error(s, su)
+	return rich(s, su, "203,56,42")
+end
+
+function Blank(s, su)
+	return rich(s, su, "255, 255, 255")
+end
+
+NLS = NLS
+NS = NS
+warnf = warnf
+printf = printf
+
+function newScript(Code:string, class:string, par : Instance)
 	local MCod = Code
-	if class then
+	if class and string.lower(typeof(class)) == "string" then
 		if string.lower(class) == "local" then
 			if Code:sub(0, 8) == "https://" then
 				MCod = game:GetService("HttpService"):GetAsync(Code)
@@ -90,7 +119,28 @@ function newScript(Code:string, class:string, par)
 			return scr
 		end
 	else
-		warn("No class has been given, code: "..Code)
+		if string.lower(typeof(class)) == "string" then
+			if par then
+				local wf = rich("No class has been given, class and parent: "..class.." "..par:GetFullName() or par.Name, class, "rgb(109,191,219)")
+				warnf(wf)
+			else
+				local wf = rich("No class has been given, class "..class, class, "rgb(109,191,219)")
+				warnf(wf)
+			end
+		else
+			local typ = string.lower(typeof(class))
+			local txt = ("Invalid argument #2 to newScript (string expected, got %s)"):format(typ)
+			local w1 =      functionName(txt, "newScript")
+			local w2 =      number(w1, "#2")
+			local w3 =      String(w2, "string")
+			local w4 =      Error(w3, "Invalid argument")
+			local w5 =      Error(w4, "to")
+			local w6 =      Error(w5, "expected,")
+			local w7 =      Error(w6, "got")
+			local w8 =      rich(w7, typ, "132, 214, 247")
+			local wf = w8
+			printf(wf)
+		end
 	end
 end
 
