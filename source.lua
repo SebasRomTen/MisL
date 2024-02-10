@@ -239,7 +239,7 @@ misc.Tweens.INFTween = function(obj:Instance, props, es, ed, wt)
 	return TweenService:Create(obj, TweenInfo.new(wt, es, ed, -1, false), props)
 end
 
-misc.Table.remove = function(t : "Table", v : "Value")
+misc.Tables.remove = function(t : "Table", v : "Value")
 	for i = 1, #t do
 		if t[i] == v then
 			table.remove(t, i)
