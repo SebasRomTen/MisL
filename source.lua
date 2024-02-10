@@ -5,6 +5,13 @@ If u give me credit i will be really thankful with u.
 Was made on
 3/4/23
 Added Tweens, Http, Tables and string concat function
+It was updated along the year but i forgot to update this lol
+5/2/24
+Made a better debugger for the newScript function
+9/2/24
+Added an easier table.remove function
+
+MisL.Tables.remove({}, "value (not necessarily a string)")
 TODO:
 Nothing RN
 ]]--
@@ -230,6 +237,14 @@ end
 misc.Tweens.INFTween = function(obj:Instance, props, es, ed, wt)
 	local TweenService = game:GetService("TweenService")
 	return TweenService:Create(obj, TweenInfo.new(wt, es, ed, -1, false), props)
+end
+
+misc.Table.remove = function(t : "Table", v : "Value")
+	for i = 1, #t do
+		if t[i] == v then
+			table.remove(t, i)
+		end
+	end
 end
 
 misc.Tables.concat = function(t1, t2)
