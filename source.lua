@@ -9,11 +9,18 @@ It was updated along the year but i forgot to update this lol
 5/2/24
 Made a better debugger for the newScript function
 9/2/24
-Added an easier table.remove function
+Added a simpler table.remove function
 
 MisL.Tables.remove({}, "value (not necessarily a string)")
+
+11/2/24
+
+Added GetAncestor function to get the main ancestor of an instance which ancestor is on workspace.
+
+Misl.GetAncestor(Instance) -- Return its main ancestor
+
 TODO:
-Nothing RN
+Nothing
 ]]--
 
 --//Framework
@@ -42,6 +49,7 @@ misc.Instances = {}
 misc.Obfuscation.Base64 = nil
 misc.Http.returnData = nil
 misc.Instances.applyprops = nil
+misc.Instances.GetAncestor = nil
 
 --//Functions
 
@@ -68,6 +76,16 @@ local function applyprops(t, obj)
 			end
 		end
 	end
+end
+
+local function GetAncestor(instance)
+	local Parent = instance.Parent
+	repeat
+		if Parent.Parent ~= workspace then
+			Parent = Parent.Parent
+		end
+	until Parent.Parent == workspace
+	return Parent
 end
 
 function rich(String : string, sub, color : string)
@@ -157,6 +175,7 @@ local Base64 = returnData("https://raw.githubusercontent.com/SebasRomTen/Lua-Bas
 misc.Obfuscation.Base64 = Base64
 misc.Http.returnData = returnData
 misc.Instances.applyprops = applyprops
+misc.Instances.GetAncestor = GetAncestor
 misc.newScript = newScript
 
 misc.Loops.RS = function(f)
